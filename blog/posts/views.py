@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 def posts_index(request):
     author_name = request.GET.get("author", "zemlik")
-    posts = Post.objects.filter(author_username=author_name)
+    posts = Post.objects.filter(author__username=author_name)
     return HttpResponse(posts)
 
 

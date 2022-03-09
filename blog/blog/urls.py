@@ -15,18 +15,20 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from blog.views import register
 from posts.views import posts_index
 from profiles.views import profiles_index
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
     path('', posts_index),
-    path('profiles/', profiles_index),
-    path('register/', register)
+    path('profiles/', profiles_index, name="profiles_index"),
+    path('register/', register, name="register"),
+    path("api/", include("api.urls", namespace="api")),
 ]
+
 
 if settings.DEBUG:
     from django.conf.urls.static import static
